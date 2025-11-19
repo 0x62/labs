@@ -1,0 +1,5 @@
+{
+  "name": "Projectile Motion Master",
+  "description": "An interactive educational simulator for projectile motion physics. Simulates flight paths based on inputs and provides AI-powered step-by-step tutoring using standard kinematic equations.",
+  "requestFramePermissions": []
+}
