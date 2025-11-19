@@ -33,10 +33,12 @@ const ProjectileLab: React.FC = () => {
     range: boolean;
     maxHeight: boolean;
     flightTime: boolean;
+    vy: boolean;
   }>({
     range: false,
     maxHeight: false,
     flightTime: false,
+    vy: false,
   });
 
   const [randomTimeTarget, setRandomTimeTarget] = useState<number | null>(null);
@@ -66,7 +68,7 @@ const ProjectileLab: React.FC = () => {
     if (result) {
       setSolvedData(result);
       setMode("simulation");
-      setChartOverrides({ range: false, maxHeight: false, flightTime: false });
+      setChartOverrides({ range: false, maxHeight: false, flightTime: false, vy: false });
 
       const safeTime = result.flightTime * (0.2 + Math.random() * 0.6);
       setRandomTimeTarget(safeTime);
@@ -134,7 +136,7 @@ const ProjectileLab: React.FC = () => {
     setMode("input");
     setSolvedData(null);
     setCorrectGuesses({});
-    setChartOverrides({ range: false, maxHeight: false, flightTime: false });
+    setChartOverrides({ range: false, maxHeight: false, flightTime: false, vy: false });
     setRandomTimeTarget(null);
     setRandomDistanceTarget(null);
     updateUrl(newInputs);
@@ -201,7 +203,7 @@ const ProjectileLab: React.FC = () => {
     setCorrectGuesses((prev) => ({ ...prev, [key]: true }));
   };
 
-  const toggleChartOverride = (key: "range" | "maxHeight" | "flightTime") => {
+  const toggleChartOverride = (key: "range" | "maxHeight" | "flightTime" | "vy") => {
     setChartOverrides((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
@@ -405,9 +407,11 @@ const ProjectileLab: React.FC = () => {
                 revealedX={!!correctGuesses.range || chartOverrides.range}
                 revealedY={!!correctGuesses.maxHeight || chartOverrides.maxHeight}
                 revealedTime={!!correctGuesses.flightTime || chartOverrides.flightTime}
+                revealedVy={chartOverrides.vy}
                 onToggleX={() => toggleChartOverride("range")}
                 onToggleY={() => toggleChartOverride("maxHeight")}
                 onToggleTime={() => toggleChartOverride("flightTime")}
+                onToggleVy={() => toggleChartOverride("vy")}
               />
 
               <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">

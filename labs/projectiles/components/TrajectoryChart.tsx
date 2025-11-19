@@ -20,9 +20,11 @@ interface TrajectoryChartProps {
   revealedX: boolean;
   revealedY: boolean;
   revealedTime: boolean;
+  revealedVy: boolean;
   onToggleX: () => void;
   onToggleY: () => void;
   onToggleTime: () => void;
+  onToggleVy: () => void;
 }
 
 const TrajectoryChart: React.FC<TrajectoryChartProps> = ({
@@ -32,9 +34,11 @@ const TrajectoryChart: React.FC<TrajectoryChartProps> = ({
   revealedX,
   revealedY,
   revealedTime,
+  revealedVy,
   onToggleX,
   onToggleY,
   onToggleTime,
+  onToggleVy,
 }) => {
   const xDomainMax = range > 0 ? Math.ceil(range * 1.1) : 10;
   const yDomainMax = maxHeight > 0 ? Math.ceil(maxHeight * 1.2) : 10;
@@ -50,6 +54,9 @@ const TrajectoryChart: React.FC<TrajectoryChartProps> = ({
           </p>
           <p className="text-xs text-blue-600">
             Height: {revealedY ? `${Number(point.y).toFixed(2)}m` : "???"}
+          </p>
+          <p className="text-xs text-purple-600">
+            Vertical Velocity: {revealedVy ? `${Number(point.vy).toFixed(2)}m/s` : "???"}
           </p>
           <p className="text-xs text-slate-400 mt-1">
             Time: {revealedTime ? `${point.t.toFixed(2)}s` : "???"}
@@ -77,9 +84,7 @@ const TrajectoryChart: React.FC<TrajectoryChartProps> = ({
       title={`Toggle ${label} visibility`}
     >
       <span className={`w-2 h-2 rounded-full ${active ? colorClass : "bg-slate-300"}`}></span>
-      <span className={`${active ? "text-slate-700" : "text-slate-400"} font-medium`}>
-        {label} {active ? "Visible" : "Hidden"}
-      </span>
+      <span className={`${active ? "text-slate-700" : "text-slate-400"} font-medium`}>{label}</span>
     </button>
   );
 
@@ -101,6 +106,12 @@ const TrajectoryChart: React.FC<TrajectoryChartProps> = ({
             active={revealedY}
             onClick={onToggleY}
             colorClass="bg-blue-500"
+          />
+          <ToggleButton
+            label="Vertical Velocity"
+            active={revealedVy}
+            onClick={onToggleVy}
+            colorClass="bg-purple-500"
           />
           <ToggleButton
             label="Time"

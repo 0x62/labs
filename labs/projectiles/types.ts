@@ -22,20 +22,21 @@ export interface TrajectoryPoint {
   x: number;
   y: number;
   t: number;
+  vy: number;
 }
 
-export type VariableKey = 
-  | 'u' 
-  | 'theta' 
-  | 'y0' 
-  | 'range' 
-  | 'maxHeight' 
-  | 'flightTime' 
-  | 'timeToMaxHeight' 
-  | 'heightAtTime' 
-  | 'velocityAtTime'
-  | 'distanceAtTime'
-  | 'timeToDistance';
+export type VariableKey =
+  | "u"
+  | "theta"
+  | "y0"
+  | "range"
+  | "maxHeight"
+  | "flightTime"
+  | "timeToMaxHeight"
+  | "heightAtTime"
+  | "velocityAtTime"
+  | "distanceAtTime"
+  | "timeToDistance";
 
 export interface HintData {
   variable: VariableKey;
